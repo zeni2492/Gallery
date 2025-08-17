@@ -2,21 +2,22 @@
 import { ref } from "vue";
 import type { ImageCardData } from "../Types/CardType.ts";
 import ImageModal from "./ImageModal.vue";
+import AdditionalData from "./CardComponents/AdditionalData.vue";
 
 const props = defineProps<{
   ImageData: ImageCardData[];
 }>();
 
-const OpenModal = ref(false);
+const OpenModal = ref<boolean>(false);
 const selectedImage = ref<ImageCardData | null>(null);
 
-const openImageModal = (image: ImageCardData, event: MouseEvent) => {
+const openImageModal = (image: ImageCardData, event: MouseEvent) : void => {
   event.stopPropagation();
   selectedImage.value = image;
   OpenModal.value = true;
 };
 
-const closeModal = () => {
+const closeModal = () :void => {
   OpenModal.value = false;
   selectedImage.value = null;
 };
@@ -25,20 +26,20 @@ const closeModal = () => {
 
 <template>
   <div v-for="data in props.ImageData" :key="data.id" class="card bg-white rounded-lg cursor-pointer">
-    <img
-        :src="data.img"
-        :alt="data.title"
-        class="card-image"
-        @click.stop="openImageModal(data, $event)"
-    >
+    <div class="image-container">
+      <img
+          :src="data.img"
+          :alt="data.img"
+          class="card-image h-64 rounded-md "
+          @click.stop="openImageModal(data, $event)"
+      >
+    </div>
     <div class="card-content">
       <div class="flex gap-2">
-        <p class="date">{{ data.Date }} •</p>
-        <p class="date">{{ data.Duration }} •</p>
-        <p class="date">{{ data.comments }}</p>
+        <AdditionalData :Date="data.Date" :Duration="data.Duration" :Comments="data.comments"/>
       </div>
-      <h2 class="title">{{ data.title }}</h2>
-      <p class="description">{{ data.desc }}</p>
+      <h2 class="title text-2xl font-semibold">{{ data.title }}</h2>
+      <p class="description text-base font-medium">{{ data.desc }}</p>
       <div class="actions">
         <div class="tags">
           <span v-for="(tag, index) in data.tags" :key="index" class="tag px-[14px] py-[6px] mr-2">
@@ -57,6 +58,17 @@ const closeModal = () => {
 </template>
 
 <style scoped>
+.image-container{
+  object-fit: cover;
+  width: 100%;
+  img{
+    object-fit: cover;
+    display: block;
+    height: 320px;
+    max-height: 350px;
+  }
+}
+
 .card {
   overflow: hidden;
   font-family: Arial, sans-serif;
@@ -111,4 +123,5 @@ button:hover {
   color: #2884EF;
   border-radius: 20px;
 }
+
 </style>

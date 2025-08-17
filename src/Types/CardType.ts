@@ -1,5 +1,5 @@
 export interface ImageCardData {
-    id: number,
+    id: string,
     title: string
     desc: string
     img: string

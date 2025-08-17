@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import {ref,onMounted,onUnmounted} from "vue";
 import {useCloseFilterStore} from "../store/filterTogglerStore.ts";
+import {useAddPostModalStore} from "../store/AddPostModalStore.ts";
+
 
 const toggleFiltersClick = useCloseFilterStore();
+const OpenModal = useAddPostModalStore()
 const activeButton = ref<string>('main')
 
 const setActive = (active: string): void => {
@@ -23,7 +26,7 @@ onUnmounted(() => {
 <header class="header w-full bg-black px-14 py-4">
   <main class="header-container flex flex-row items-center">
     <button @click="toggleFiltersClick.ToggleFilters" class="cursor-pointer">
-      <img class="header-mobile-btn hidden" src="../assets/icons/asideIcon.svg" alt="aside">
+      <img class="header-mobile-btn hidden mr-2" src="../assets/icons/asideIcon.svg" alt="aside">
     </button>
     <img src="../assets/Logo.svg" alt="logo">
     <div class="header-nav-buttons text-white flex ml-20 gap-x-5 items-center">
@@ -39,6 +42,9 @@ onUnmounted(() => {
           @click="setActive('blog')"
           class="cursor-pointer">Блог</h3>
     </div>
+    <div class="text-white w-full flex justify-end">
+      <button @click="OpenModal.OpenModal">Добавить пост</button>
+    </div>
   </main>
 </header>
 </template>
@@ -51,7 +57,7 @@ onUnmounted(() => {
     }
     .header-mobile-btn{
       display: flex;
-      margin-right: 15px;
+      margin-right:35px;
     }
     .header-nav-buttons{
       display: none;

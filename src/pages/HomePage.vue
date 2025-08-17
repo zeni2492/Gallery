@@ -2,32 +2,47 @@
 import Header from "../components/Header.vue";
 import NavBar from "../components/FilterComponents/NavBar.vue";
 import ImageCard from "../components/ImageCard.vue";
-import Data from "../assets/CardData.json"
-import {getDocs, collection} from "firebase/firestore"
-import {db} from "../configs/FireBaseConfig.ts";
-import {onMounted} from "vue";
+import {onMounted, computed} from "vue";
+import AddPostModal from "../components/AddPostModal.vue";
+import { useAddPostModalStore } from "../store/AddPostModalStore";
+import {storeToRefs} from "pinia"
+import {useSearchStore} from "../store/SearchStore.ts";
+import NotFound from "../components/NotFound.vue";
 
-const getData = async () =>{
-  const result = await getDocs(collection(db,"Cards"))
-  console.log(result)
-  return result.docs
-}
+const OpenModal = useAddPostModalStore()
+const SearchStore = useSearchStore()
+
+const {IsClosed} = storeToRefs(OpenModal)
+const {searchResults, loading} = storeToRefs(SearchStore);
+
+const DisplayedData = computed(() => {
+  return searchResults.value
+})
 
 onMounted(() =>{
-  getData()
+  SearchStore.searchCards('', [])
 })
 </script>
 
 <template>
   <Header/>
-  <main class="w-full">
+  <div class="w-full">
     <NavBar/>
-  </main>
+  </div>
   <div class="w-full flex flex-wrap justify-center items-center">
-    <div class="cards-container  bg-white mt-5 w-full justify-center items-center">
-      <ImageCard :ImageData="Data"/>
+    <div v-if="DisplayedData.length > 0 && !loading" class="cards-container bg-white mt-5 w-full justify-center items-start">
+      <ImageCard
+          v-for="card in DisplayedData"
+          :key="card.id"
+          :ImageData="[card]"
+      />
+    </div>
+    <div v-else-if="loading">Загрузка...</div>
+    <div v-else>
+      <NotFound/>
     </div>
   </div>
+  <AddPostModal v-if="IsClosed"/>
 </template>
 
 <style scoped>
@@ -45,9 +60,13 @@ body {
   margin-right: 50px;
   margin-left: 50px;
   border-radius: 12px;
+  @media (max-width: 400px) {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1180px) {
   .cards-container {
     grid-template-columns: repeat(2, 1fr);
   }

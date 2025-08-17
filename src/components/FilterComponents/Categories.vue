@@ -31,11 +31,13 @@ const activateButton = (id: number): void => {
           v-if="!category.isActive"
           class="ml-2"
           src="../../assets/icons/plus.svg"
+          alt=""
       >
       <img
           v-if="category.isActive"
           class="ml-2"
           src="../../assets/icons/activeButton.svg"
+          alt=""
       >
     </div>
   </div>
@@ -46,16 +48,19 @@ const activateButton = (id: number): void => {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
+  align-items: center;
 }
 
 .hiddenCategories {
   height: 0;
   overflow: hidden;
+  padding: 0 !important;
 }
 
 .category-item {
   display: inline-flex;
   justify-content: center;
+  align-items: center;
   background: #E3F2FD;
   color: #2884EF;
   padding: 6px 12px;
@@ -70,11 +75,24 @@ const activateButton = (id: number): void => {
   &:hover {
     background: #BEE3F8;
   }
-
 }
 
 .active {
   background: #3E97FF;
   color: #fff;
+}
+
+.clear-all-button {
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  font-size: 14px;
+  margin-left: 10px;
+  text-decoration: underline;
+
+  &:hover {
+    color: #333;
+  }
 }
 </style>
