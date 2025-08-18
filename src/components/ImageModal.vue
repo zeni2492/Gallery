@@ -162,7 +162,7 @@ onMounted(() => {
 }
 
 .CommentsInput{
-  transition: height border 0.6s;
+  transition: height 0.6s;
   height: 60px;
 
   &:focus{

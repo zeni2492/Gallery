@@ -9,15 +9,13 @@ export function useComments() {
     const subscribeToCommentsCount = (postId: string) => {
         const q = query(collection(db, "comments"), where("postId", "==", postId));
 
-        const unsubscribe = onSnapshot(q, (snapshot) => {
+        return  unsubscribe = onSnapshot(q, (snapshot) => {
             commentsCount.value = snapshot.size;
             commentsList.value = snapshot.docs.map(doc => ({
                 id: doc.id,
                 ...doc.data()
             }));
         });
-
-        return unsubscribe;
     };
 
     return {
