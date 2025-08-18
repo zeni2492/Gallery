@@ -8,3 +8,10 @@ body{
 *{
     font-family: 'Inter', sans-serif;
 }
+
+:root{
+    --Primary: #3E97FF;
+    --Primary-Light: #EEF6FF;
+    --Primary-active:#2884EF;
+    --Danger: #F1416C;
+}

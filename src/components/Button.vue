@@ -6,15 +6,11 @@ const props = defineProps<{
 
 <template>
   <button v-if="!IsPrimaryButton"
-          class="bg-[#EEF6FF] text-[#3E97FF] py-3 px-9 rounded-md hover:bg-[#E0ECFF]">
+          class="bg-Primary-Light text-Primary py-3 px-9 rounded-md hover:bg-[#E0ECFF]">
     <slot></slot>
   </button>
   <button v-else
-          class="bg-[#3E97FF] text-white py-3 px-4 rounded-md hover:bg-[#2D83EB] disabled:opacity-50 disabled:cursor-not-allowed">
+          class="bg-Primary text-white py-3 px-4 rounded-md hover:bg-[#2D83EB] disabled:opacity-50 disabled:cursor-not-allowed">
     <slot></slot>
   </button>
 </template>
-
-<style scoped>
-
-</style>

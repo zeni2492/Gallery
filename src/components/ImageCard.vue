@@ -25,7 +25,7 @@ const closeModal = () :void => {
 </script>
 
 <template>
-  <div v-for="data in props.ImageData" :key="data.id" class="card bg-white rounded-lg cursor-pointer">
+  <div v-for="data in props.ImageData" :key="data.id" class="card rounded-lg cursor-pointer">
     <div class="image-container">
       <img
           :src="data.img"
@@ -36,7 +36,7 @@ const closeModal = () :void => {
     </div>
     <div class="card-content">
       <div class="flex gap-2">
-        <AdditionalData :Date="data.Date" :Duration="data.Duration" :Comments="data.comments"/>
+        <AdditionalData :Date="data.Date" :Duration="data.Duration" :Comments="data.comments" :postId="data.id"/>
       </div>
       <h2 class="title text-2xl font-semibold">{{ data.title }}</h2>
       <p class="description text-base font-medium">{{ data.desc }}</p>
@@ -86,11 +86,6 @@ const closeModal = () :void => {
   padding-top: 10px;
 }
 
-.date {
-  font-size: 12px;
-  color: #666;
-}
-
 .title {
   font-size: 18px;
   margin: 5px 0;
@@ -119,8 +114,8 @@ button:hover {
   background-color: #e0e0e0;
 }
 .tag{
-  background: #EEF6FF;
-  color: #2884EF;
+  background: var(--Primary-Light);
+  color: var(--Primary-active);
   border-radius: 20px;
 }
 

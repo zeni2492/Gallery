@@ -1,3 +1,9 @@
+<!--1) Сделать фильтр Даты-->
+<!--2) сделать комменты-->
+<!--2.1) переделать логику комментов по макету-->
+<!--3) пофиксить скролл модалки-->
+<!--4) придумать что то профилями-->
+
 <script setup lang="ts">
 import Header from "../components/Header.vue";
 import NavBar from "../components/FilterComponents/NavBar.vue";
@@ -60,7 +66,7 @@ body {
   margin-right: 50px;
   margin-left: 50px;
   border-radius: 12px;
-  @media (max-width: 400px) {
+  @media (max-width: 800px) {
     margin-left: 10px;
     margin-right: 10px;
   }

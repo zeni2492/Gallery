@@ -66,7 +66,7 @@ onUnmounted(() => {
 
   .active{
     background: #191919;
-    color: #3E97FF;
+    color: var(--Primary);
     padding: 8px 14px;
     border-radius: 8px;
     transition: background .2s ease;
