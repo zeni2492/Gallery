@@ -6,7 +6,7 @@ import {useAddPostModalStore} from "../store/AddPostModalStore.ts";
 
 const toggleFiltersClick = useCloseFilterStore();
 const OpenModal = useAddPostModalStore()
-const activeButton = ref<string>('main')
+const activeButton = ref<string>('blog')
 
 const setActive = (active: string): void => {
   activeButton.value = active

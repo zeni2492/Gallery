@@ -87,7 +87,7 @@ onMounted(() => {
     <div @click.stop="closeOnBackdrop"
          class="modal rounded-md fixed top-1/2
          left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white
-         w-1/2 overflow-auto z-10 cursor-default px-[15px] pt-[15px]
+         w-1/3 overflow-auto z-10 cursor-default px-[15px] pt-[15px]
          flex flex-col  pb-12 min-w-80"
     >
       <div class="modal-dialog w-full flex justify-between items-start   ">
@@ -121,7 +121,7 @@ onMounted(() => {
           </div>
           <div class="w-full flex justify-end gap-3 mt-2">
             <Button @click="handleClose" :IsPrimaryButton="false">Отмена</Button>
-            <Button  type="submit" :IsPrimaryButton="true">Опубликовать</Button>
+            <Button :disabled="Comments.length === 0 || Comments.length > 250" type="submit" :IsPrimaryButton="true">Опубликовать</Button>
           </div>
         </form>
         <div v-for="comment in CommentStorage" :key="comment.id" class="w-full ">
